@@ -67,6 +67,12 @@ The ```memoryBacking``` part specifies that pages used by the virtual machine ma
 
 ```qemu:commandline``` will need adjustments to work with your setup. The uuid ```fc444019-54df-47bc-a0a0-7308ce9681a8``` must be replaced with the UUID used for creating the virtual GPU.
 
+## Guest setup
+
+Gust setup should be pretty straight forward. No additional configuration was required to start Xorg.
+
+I was unable to start Xorg with an additional emulated graphics card though. Any attempt to start Xorg or even run ```Xorg -configure``` resulted in a segfault inside OsLookupColor. Using only the Intel KVMGT card "fixed" that issue though.
+
 ## EFI
 
 I have not been able to make KVMGT work with UEFI on the guest. I tried booting with various versions of OVMF but OVMF startup always hung as soon as it started probing the vGPU PCI device. The debug log output of OVMF is attached as ```ovmf.log```.
