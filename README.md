@@ -75,4 +75,4 @@ I was unable to start Xorg with an additional emulated graphics card though. Any
 
 ## EFI
 
-I have not been able to make KVMGT work with UEFI on the guest. I tried booting with various versions of OVMF but OVMF startup always hung as soon as it started probing the vGPU PCI device. The debug log output of OVMF is attached as ```ovmf.log```.
+I have not been able to get KVMGT to work with UEFI on the guest system. I tried booting with various versions of OVMF but OVMF startup always hangs as soon as it starts probing the vGPU PCI device. The debug log output of OVMF is attached as ```ovmf.log```.
