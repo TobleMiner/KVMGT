@@ -3,6 +3,10 @@ KVMGT
 
 This test was done on an ArchLinux installation with Kernel 4.13.3-1
 
+Also I will be using the terms vGPU, KVMGT graphics card and (Intel) virtual GPU interchangeably. The do all referr to Intel GVT-G KVMGT.
+
+In contrast the term emulated GPU or emulated graphics card refer to generic software GPU soltuions like QXL or virtio-gpu.
+
 # Preparing the host
 
 ## Kernel cmdline
