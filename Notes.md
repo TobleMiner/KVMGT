@@ -32,6 +32,10 @@ To use this device in libvirt it must be accessible by the QEMU user/group. Ther
 
 ## Libvirt
 
+I'd recommend installing a new virtual machine with an emulated graphics adapter to create the bootable base image. Using KVMGT for installation will prove very challenging since at the time of writing there is no way to forward output of a KVMGT vGPU to a real display. Thus the only way of installing the os with no emulated graphics would be to use a serial console which is often not supported out of the box.
+
+Note that I was not able to use both an Intel KVMGT vGPU and an emulated graphics adapter at the same time. As soon as I tried to start Xorg on the guest system it would segfault inside OsLookupColor.
+
 By default libvirt won't allow accessing sysfs devices directly. This is enforced by cgroup restrictions. To loosen the cgroup restriction edit ```/etc/libvirt/qemu.conf``` and make sure it contains ```cgroup_controllers = [ "cpu", "memory", "blkio", "cpuset", "cpuacct" ]``` (note the absence of "devices"). This disables sysfs device access whitelisting.
 
 Now create a new libvirt VM using the example configuration from ```domain.xml```. The most important parts of the configuration are
@@ -50,9 +54,13 @@ and
     <qemu:arg value='-nographic'/>
   </qemu:commandline>
 ```
-.
+
 Note that ```<qemu:commandline>``` will fail to validate if the attribute ```xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'```is not set on the XML root ```domain``` node.
 
 The ```memoryBacking``` part specifies that pages used by the virtual machine may not be swapped out by the host.
 
 ```qemu:commandline``` will need Adjustments to work with your setup. The uuid ```fc444019-54df-47bc-a0a0-7308ce9681a8``` must be replaced with the UUID used for creating the virtual GPU.
+
+## EFI
+
+I have not been able to make KVMGT work with UEFI on the guest. I tried booting with various versions of OVMF but OVMF startup always hung as soon as it started probing the vGPU PCI device. The debug log output of OVMF is attached as ```ovmf.log```.
