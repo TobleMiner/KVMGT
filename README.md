@@ -30,6 +30,8 @@ name of the PCI ID of your Intel graphics card.
 
 Before using the KVMGT GPU it must be created. Inside ```/sys/class/mdev_bus/$PCI_ID/mdev_supported_types``` you should find at least one type of supported virtual GPU configuration.
 
+The different virtual GPU configurations differ in the amount of video memory available and the maximum screen resolution available.
+
 Create a new uuid by calling ```uuidgen```. Now pick one of the virtual GPU configs and echo the UUID to ```/sys/class/mdev_bus/$PCI_ID/mdev_supported_types/$VGPU_TYPE/create```. After that there should be an entry by the name of the UUID in ```/sys/class/mdev_bus/$PCI_ID/mdev_supported_types/$VGPU_TYPE/devices```.
 
 To use this device in libvirt it must be accessible by the QEMU user/group. Therefore the right VFIO node in ```/dev/vfio``` must have the correct permissions set. To find the id of the VFIO node execute ```readlink /sys/class/mdev_bus/$PCI_ID/mdev_supported_types/$VGPU_TYPE/devices/$UUID/iommu_group```. This should yield something much alike ```../../../../kernel/iommu_groups/7```. In this case the VFIO node would be ```/dev/vfio/7```. To grant qemu access to VFIO node either do ```chmod 666 /dev/vfio/$VFIO_ID``` or ```chown :kvm /dev/vfio/$VFIO_ID; chmod 660 /dev/vfio/$VFIO_ID```.
