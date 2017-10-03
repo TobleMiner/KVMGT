@@ -3,9 +3,9 @@ KVMGT
 
 This test was done on an ArchLinux installation with Kernel 4.13.3-1
 
-Also I will be using the terms vGPU, KVMGT graphics card and (Intel) virtual GPU interchangeably. The do all referr to Intel GVT-G KVMGT.
+Also I will be using the terms vGPU, KVMGT graphics card and (Intel) virtual GPU interchangeably. The do all refer to Intel GVT-G KVMGT.
 
-In contrast the term emulated GPU or emulated graphics card refer to generic software GPU soltuions like QXL or virtio-gpu.
+In contrast the term emulated GPU or emulated graphics card refer to generic software GPU solutions like QXL or virtio-gpu.
 
 # Preparing the host
 
@@ -38,7 +38,7 @@ To use this device in libvirt it must be accessible by the QEMU user/group. Ther
 
 ## Libvirt
 
-I'd recommend installing a new virtual machine with an emulated graphics adapter to create the bootable base image. Using KVMGT for installation will prove very challenging since at the time of writing there is no way to forward output of a KVMGT vGPU to a real display. Thus the only way of installing the os with no emulated graphics would be to use a serial console which is often not supported out of the box.
+I'd recommend installing a new virtual machine with an emulated graphics adapter to create the bootable base image. Using KVMGT for installation will prove very challenging since at the time of writing there is no way to forward output of a KVMGT vGPU to a real display. Thus the only way of installing the OS with no emulated graphics would be to use a serial console which is often not supported out of the box.
 
 Note that I was not able to use both an Intel KVMGT vGPU and an emulated graphics adapter at the same time. As soon as I tried to start Xorg on the guest system it would segfault inside OsLookupColor.
 
