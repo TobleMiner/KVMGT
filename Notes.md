@@ -57,9 +57,9 @@ and
 
 Note that ```<qemu:commandline>``` will fail to validate if the attribute ```xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'```is not set on the XML root ```domain``` node.
 
-The ```memoryBacking``` part specifies that pages used by the virtual machine may not be swapped out by the host.
+The ```memoryBacking``` part specifies that pages used by the virtual machine may not be swapped out by the host. If not specified qemu will try to lock all pages (for the graphics memory?) individually resulting in exceeding the RLIMIT_MEMLOCK limit.
 
-```qemu:commandline``` will need Adjustments to work with your setup. The uuid ```fc444019-54df-47bc-a0a0-7308ce9681a8``` must be replaced with the UUID used for creating the virtual GPU.
+```qemu:commandline``` will need adjustments to work with your setup. The uuid ```fc444019-54df-47bc-a0a0-7308ce9681a8``` must be replaced with the UUID used for creating the virtual GPU.
 
 ## EFI
 
